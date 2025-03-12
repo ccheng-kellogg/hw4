@@ -1,16 +1,22 @@
-<h1><%= @place["name"] %></h1>
+<h1 class="mb-4"><%= @place["name"] %></h1>
 
-<h2>My Entries</h2>
-<% for entry in @entries %>
-  <h3><%= entry["title"] %></h3>
-  <h4><%= entry["occurred_on"] %></h4>
-  <p><%= entry["description"] %></p>
-<% end %>
+<h2 class="mb-3">My Entries</h2>
 
-<p>
-  <a href="/entries/new?place_id=<%= @place["id"] %>">New Entry</a>
-</p>
+<div class="row">
+  <% @entries.each do |entry| %>
+    <div class="col-md-4 mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= entry["title"] %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= entry["occurred_on"] %></h6>
+          <p class="card-text"><%= entry["description"] %></p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<p>
-  <a href="/places">Back to All Places</a>
-</p>
+<div class="mt-4">
+  <%= link_to "New Entry", "/entries/new?place_id=#{@place["id"]}", class: "btn btn-primary me-2" %>
+  <%= link_to "Back to All Places", "/places", class: "btn btn-secondary" %>
+</div>
